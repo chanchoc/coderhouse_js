@@ -1,0 +1,14 @@
+/*-----------------------------------------------------------------------
+- Navbar
+-----------------------------------------------------------------------*/
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $bckg-navbar;
+    height: 100px;
+    box-shadow: 0px 4px 45px -11px rgba(3, 3, 3, 1);
+    margin-bottom: 2rem;
+}

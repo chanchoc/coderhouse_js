@@ -8,4 +8,115 @@
   box-sizing: border-box;
 }
 
+/*-----------------------------------------------------------------------
+- Generals
+-----------------------------------------------------------------------*/
+html {
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.8705882353);
+  font-family: "Lato", sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/*-----------------------------------------------------------------------
+- Navbar
+-----------------------------------------------------------------------*/
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2185d0;
+  height: 100px;
+  box-shadow: 0px 4px 45px -11px rgb(3, 3, 3);
+  margin-bottom: 2rem;
+}
+
+/*-----------------------------------------------------------------------
+- Options
+-----------------------------------------------------------------------*/
+.options {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.options button {
+  border: 2px solid rgba(51, 51, 51, 0.745);
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  margin: 0 0.6rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.8705882353);
+  cursor: pointer;
+}
+
+/*-----------------------------------------------------------------------
+- Tasks
+-----------------------------------------------------------------------*/
+.task-input {
+  margin-bottom: 2rem;
+  width: clamp(320px, 100%, 900px);
+  height: 3rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.tasks {
+  border-collapse: separate;
+  width: clamp(320px, 100%, 900px);
+}
+.tasks th {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8705882353);
+  color: #242424;
+  font-weight: bold;
+}
+.tasks td {
+  padding: 1rem 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+}
+.tasks td img {
+  height: 25px;
+  object-fit: cover;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.tasks tr {
+  background-color: rgb(51, 51, 51);
+}
+.tasks tr:nth-of-type(2n) {
+  background: rgb(68, 68, 68);
+}
+.tasks .task {
+  width: 50%;
+}
+
 /*# sourceMappingURL=styles.css.map */

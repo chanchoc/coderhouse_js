@@ -33,9 +33,9 @@ function taskAdd() {
     let firstResponsible, secondResponsible;
     for (let i = 1; i <= 2; i++) {
         if (i === 1) {
-            firstResponsible = prompt("Ingrese el nombre del responsable N°" + i);
+            firstResponsible = prompt("Ingrese el nombre del responsable N°" + i).trim();
         } else {
-            secondResponsible = prompt("Ingrese el nombre del responsable N°" + i);
+            secondResponsible = prompt("Ingrese el nombre del responsable N°" + i).trim();
         }
     }
     return task + " -> Fecha de carga: " + TODAY + " -> " + days + " días para completarla -> Sus responsables son: " + firstResponsible + " y " + secondResponsible;
