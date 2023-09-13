@@ -11,33 +11,40 @@
     border: 1px solid black;
     border-radius: 5px;
 }
-.tasks {
-    border-collapse: separate;
-    width: clamp(320px, 100%, 900px);
-    th {
-        padding: 1rem;
-        background-color: $color;
-        color: $bckg;
-        font-weight: bold;
-    }
-    td {
-        padding: 1rem 0.5rem;
-        text-align: center;
-        vertical-align: middle;
-        img {
-            height: 25px;
-            object-fit: cover;
-            cursor: pointer;
-            margin: 0 5px;
+.task-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    .tasks {
+        border-collapse: separate;
+        width: clamp(320px, 100%, 900px);
+        th {
+            padding: 1rem;
+            background-color: $color;
+            color: $bckg;
+            font-weight: bold;
         }
-    }
-    tr {
-        background-color: rgb(51, 51, 51);
-        &:nth-of-type(2n) {
-            background: rgb(68, 68, 68);
+        td {
+            padding: 1rem 0.5rem;
+            text-align: center;
+            vertical-align: middle;
+            img {
+                height: 25px;
+                object-fit: cover;
+                cursor: pointer;
+                margin: 0 5px;
+            }
         }
-    }
-    .task {
-        width: 50%;
+        tr {
+            background-color: rgb(51, 51, 51);
+            &:nth-of-type(2n) {
+                background: rgb(68, 68, 68);
+            }
+        }
+        .task {
+            width: 50%;
+        }
     }
 }

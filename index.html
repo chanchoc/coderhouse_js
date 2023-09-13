@@ -16,81 +16,82 @@
         <title>To-Do List App</title>
     </head>
     <body>
-        <head>
+        <header>
             <nav>
                 <h1>To-Do List App</h1>
             </nav>
-        </head>
+        </header>
         <main>
             <div class="options">
                 <button id="order-by-date">Ordenar por Fecha</button>
                 <button id="order-by-date">Ordenar por Días</button>
             </div>
             <input type="text" class="task-input" />
-            <table class="tasks">
-                <thead>
-                    <tr>
-                        <th scope="col" class="task">Tarea</th>
-                        <th scope="col" class="task-date">Creación</th>
-                        <th scope="col" class="task-days">Duración</th>
-                        <th scope="col" class="task-actions">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tarea #1</td>
-                        <td>19 Aug</td>
-                        <td>200</td>
-                        <td>
-                            <img src="./multimedia/done.png" alt="completar tarea" />
-                            <img src="./multimedia/edit.png" alt="editar tarea" />
-                            <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tarea #2</td>
-                        <td>19 Aug</td>
-                        <td>200</td>
-                        <td>
-                            <img src="./multimedia/done.png" alt="completar tarea" />
-                            <img src="./multimedia/edit.png" alt="editar tarea" />
-                            <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tarea #3</td>
-                        <td>19 Aug</td>
-                        <td>200</td>
-                        <td>
-                            <img src="./multimedia/done.png" alt="completar tarea" />
-                            <img src="./multimedia/edit.png" alt="editar tarea" />
-                            <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tarea #4</td>
-                        <td>19 Aug</td>
-                        <td>200</td>
-                        <td>
-                            <img src="./multimedia/done.png" alt="completar tarea" />
-                            <img src="./multimedia/edit.png" alt="editar tarea" />
-                            <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tarea #5</td>
-                        <td>19 Aug</td>
-                        <td>200</td>
-                        <td>
-                            <img src="./multimedia/done.png" alt="completar tarea" />
-                            <img src="./multimedia/edit.png" alt="editar tarea" />
-                            <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="task-container">
+                <table class="tasks">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="task">Tarea</th>
+                            <th scope="col" class="task-date">Creación</th>
+                            <th scope="col" class="task-days">Duración</th>
+                            <th scope="col" class="task-actions">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tarea #1</td>
+                            <td>19 Aug</td>
+                            <td>200</td>
+                            <td>
+                                <img src="./multimedia/done.png" alt="completar tarea" />
+                                <img src="./multimedia/edit.png" alt="editar tarea" />
+                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tarea #2</td>
+                            <td>19 Aug</td>
+                            <td>200</td>
+                            <td>
+                                <img src="./multimedia/done.png" alt="completar tarea" />
+                                <img src="./multimedia/edit.png" alt="editar tarea" />
+                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tarea #3</td>
+                            <td>19 Aug</td>
+                            <td>200</td>
+                            <td>
+                                <img src="./multimedia/done.png" alt="completar tarea" />
+                                <img src="./multimedia/edit.png" alt="editar tarea" />
+                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tarea #4</td>
+                            <td>19 Aug</td>
+                            <td>200</td>
+                            <td>
+                                <img src="./multimedia/done.png" alt="completar tarea" />
+                                <img src="./multimedia/edit.png" alt="editar tarea" />
+                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tarea #5</td>
+                            <td>19 Aug</td>
+                            <td>200</td>
+                            <td>
+                                <img src="./multimedia/done.png" alt="completar tarea" />
+                                <img src="./multimedia/edit.png" alt="editar tarea" />
+                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </main>
-        <!-- 
-        <script src="./scripts/main.js"></script>-->
+        <script src="./scripts/main.js"></script>
     </body>
 </html>

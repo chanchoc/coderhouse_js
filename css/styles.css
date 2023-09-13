@@ -16,14 +16,13 @@ html {
 }
 
 body {
-  max-width: 1400px;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #242424;
-  color: rgba(255, 255, 255, 0.8705882353);
+  color: rgba(255, 255, 255, 0.871);
   font-family: "Lato", sans-serif;
 }
 
@@ -32,6 +31,7 @@ h1 {
 }
 
 main {
+  max-width: 1400px;
   width: 100%;
   display: flex;
   flex-flow: column wrap;
@@ -42,6 +42,13 @@ main {
 /*-----------------------------------------------------------------------
 - Navbar
 -----------------------------------------------------------------------*/
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #2185d0;
+  margin-bottom: 2rem;
+}
+
 nav {
   width: 100%;
   display: flex;
@@ -61,6 +68,7 @@ nav {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 .options button {
@@ -71,7 +79,7 @@ nav {
   font-size: 1rem;
   font-weight: bold;
   background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.8705882353);
+  color: rgba(255, 255, 255, 0.871);
   cursor: pointer;
 }
 
@@ -88,34 +96,41 @@ nav {
   border-radius: 5px;
 }
 
-.tasks {
+.task-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+}
+.task-container .tasks {
   border-collapse: separate;
   width: clamp(320px, 100%, 900px);
 }
-.tasks th {
+.task-container .tasks th {
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.8705882353);
+  background-color: rgba(255, 255, 255, 0.871);
   color: #242424;
   font-weight: bold;
 }
-.tasks td {
+.task-container .tasks td {
   padding: 1rem 0.5rem;
   text-align: center;
   vertical-align: middle;
 }
-.tasks td img {
+.task-container .tasks td img {
   height: 25px;
   object-fit: cover;
   cursor: pointer;
   margin: 0 5px;
 }
-.tasks tr {
+.task-container .tasks tr {
   background-color: rgb(51, 51, 51);
 }
-.tasks tr:nth-of-type(2n) {
+.task-container .tasks tr:nth-of-type(2n) {
   background: rgb(68, 68, 68);
 }
-.tasks .task {
+.task-container .tasks .task {
   width: 50%;
 }
 
