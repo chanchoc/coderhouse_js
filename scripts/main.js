@@ -159,3 +159,7 @@ console.log("Tareas ordenadas por días decrecientemente:");
 taskArray.forEach((task) => {
     console.log(`${task["task"]} -> Fecha de carga: ${task["date"].toJSON().slice(0, 10)} -> ${task["days"]} días -> Sus responsables son: ${task["firstResponsible"]} y ${task["secondResponsible"]}`);
 });
+
+// Se le da la oportunidad de filtrar por texto al usuario
+const search = prompt("Ingrese un valor de filtrado para las tareas:").toUpperCase().trim();
+console.table(taskArray.filter((task) => task["task"].toUpperCase().includes(search)));
