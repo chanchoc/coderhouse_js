@@ -7,9 +7,10 @@ La misma contendrá:
     -   Nombre de la tarea
     -   Fecha de carga
     -   Días de duración
+    -   Mediante una modal
 -   Posibilidad de marcar las tareas como completas
 -   Posibilidad de eliminar una tarea
--   Edición de tareas creadas
+-   Edición de tareas creadas -> Modal
 -   Tab para ver las tareas ya completadas
 -   Guardado en local storage
 -   Posibilidad de ordenar las tareas por:

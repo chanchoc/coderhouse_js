@@ -22,8 +22,8 @@
         width: clamp(320px, 100%, 900px);
         th {
             padding: 1rem;
-            background-color: $color;
-            color: $bckg;
+            background-color: rgb(207, 205, 205);
+            color: black;
             font-weight: bold;
         }
         td {
@@ -45,6 +45,13 @@
         }
         .task {
             width: 50%;
+        }
+        .task-options {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: row nowrap;
+            gap: 10px;
         }
     }
 }

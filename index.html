@@ -22,12 +22,35 @@
             </nav>
         </header>
         <main>
-            <div class="options">
-                <button id="order-by-date">Ordenar por Fecha</button>
-                <button id="order-by-date">Ordenar por Días</button>
-            </div>
-            <input type="text" class="task-input" />
-            <div class="task-container">
+            <section class="options">
+                <button id="new-task">Nueva Tarea</button>
+                <form id="sorting">
+                    <select name="sort-type" id="sort-type">
+                        <option value="date">Fecha</option>
+                        <option value="days">Días</option>
+                    </select>
+                    <select name="sort-order" id="sort-order">
+                        <option value="asc">Ascendiente</option>
+                        <option value="desc">Descendiente</option>
+                    </select>
+                    <button type="submit">Ordenar</button>
+                </form>
+            </section>
+            <section class="new-task-modal hidden">
+                <div>
+                    <h2>Nueva Tarea</h2>
+                    <button id="new-task-close">⨉</button>
+                </div>
+                <form id="add-new-task">
+                    <label for="task">Tarea:</label>
+                    <input type="text" id="task" placeholder="Ingrese su tarea..." required />
+                    <label for="days">Días:</label>
+                    <input type="number" id="days" min="0" required />
+                    <button type="submit">Crear</button>
+                </form>
+            </section>
+            <div class="overlay hidden"></div>
+            <section class="task-container">
                 <table class="tasks">
                     <thead>
                         <tr>
@@ -37,61 +60,12 @@
                             <th scope="col" class="task-actions">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tarea #1</td>
-                            <td>19 Aug</td>
-                            <td>200</td>
-                            <td>
-                                <img src="./multimedia/done.png" alt="completar tarea" />
-                                <img src="./multimedia/edit.png" alt="editar tarea" />
-                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tarea #2</td>
-                            <td>19 Aug</td>
-                            <td>200</td>
-                            <td>
-                                <img src="./multimedia/done.png" alt="completar tarea" />
-                                <img src="./multimedia/edit.png" alt="editar tarea" />
-                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tarea #3</td>
-                            <td>19 Aug</td>
-                            <td>200</td>
-                            <td>
-                                <img src="./multimedia/done.png" alt="completar tarea" />
-                                <img src="./multimedia/edit.png" alt="editar tarea" />
-                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tarea #4</td>
-                            <td>19 Aug</td>
-                            <td>200</td>
-                            <td>
-                                <img src="./multimedia/done.png" alt="completar tarea" />
-                                <img src="./multimedia/edit.png" alt="editar tarea" />
-                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tarea #5</td>
-                            <td>19 Aug</td>
-                            <td>200</td>
-                            <td>
-                                <img src="./multimedia/done.png" alt="completar tarea" />
-                                <img src="./multimedia/edit.png" alt="editar tarea" />
-                                <img src="./multimedia/delete.png" alt="eliminar tarea" />
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="task-elements"></tbody>
                 </table>
-            </div>
+            </section>
         </main>
+        <script src="./scripts/modal.js"></script>
+        <script src="./scripts/sorting.js"></script>
         <script src="./scripts/main.js"></script>
     </body>
 </html>
