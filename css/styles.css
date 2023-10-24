@@ -37,7 +37,6 @@ main {
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
-  margin: 0 10px;
 }
 
 h2 {
@@ -231,6 +230,7 @@ nav {
   align-items: center;
   justify-content: center;
   overflow-x: auto;
+  margin: 0px 10px;
 }
 .task-container .tasks {
   border-collapse: separate;
