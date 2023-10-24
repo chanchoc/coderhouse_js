@@ -230,7 +230,6 @@ nav {
   align-items: center;
   justify-content: center;
   overflow-x: auto;
-  margin: 0px 10px;
 }
 .task-container .tasks {
   border-collapse: separate;
