@@ -18,6 +18,6 @@ function sortTasks() {
         tasksArray.sort((a, b) => b[sortType] - a[sortType]);
     }
     if (JSON.stringify(tasksArrayOld) !== JSON.stringify(tasksArray)) {
-        showTasks();
+        showPendingTasks();
     }
 }

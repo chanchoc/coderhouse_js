@@ -1,121 +1,38 @@
 /* Archivo de código principal.
 Contiene las principales funcionalidades del proyecto. */
 
-// Función para asegurarme que los strings agregados sean válidos.
-function stringCheck(type) {
-    let name;
-    do {
-        if (name === "") {
-            alert("Por favor ingrese un valor válido!");
-        }
-        name = prompt("Ingrese su " + type + ":");
-    } while (name.trim() === "");
-    return name.trim();
-}
-
-// Función para asegurarme que los días de las tareas sean válidos.
-function daysCheck() {
-    let days = 0;
-    do {
-        if (days < 0 || isNaN(parseInt(days))) {
-            alert("Por favor ingrese una cantidad válida!");
-        }
-        days = prompt("Ingrese la cantidad de días estimados:");
-    } while (parseInt(days) < 0 || isNaN(parseInt(days)));
-    return parseInt(days);
-}
-
 // Defino la class Task
 class Task {
-    constructor(task, days, firstResponsible, secondResponsible) {
+    constructor(id, task, days, date = null, done = false, end = null) {
+        this.id = parseInt(id);
         this.task = task;
-        this.days = days;
-        this.date = new Date();
-        this.done = false;
-        this.firstResponsible = firstResponsible;
-        this.secondResponsible = secondResponsible;
+        this.days = parseInt(days);
+        this.date = date ? new Date(date) : new Date();
+        this.done = done;
+        this.end = end ? new Date(end) : null;
     }
     toString = () => {
         return this.task;
     };
 }
 
-// Función para la carga de las distintas tareas pendientes del usuario.
-function taskAdd() {
-    let task = stringCheck("tarea");
-    let days = daysCheck();
-    let firstResponsible, secondResponsible;
-    for (let i = 1; i <= 2; i++) {
-        if (i === 1) {
-            firstResponsible = prompt("Ingrese el nombre del responsable N°" + i).trim();
-        } else {
-            secondResponsible = prompt("Ingrese el nombre del responsable N°" + i).trim();
-        }
-    }
-    return new Task(task, days, firstResponsible, secondResponsible);
-}
-
-// Función para chequear si el usuario quiere continuar con la carga de tareas.
-function continueAdding() {
-    let carryOn = "";
-    let count = 0;
-    do {
-        if (count > 0 && carryOn.toUpperCase().trim() !== "Y" && carryOn.toUpperCase().trim() !== "N") {
-            alert("Por favor ingrese una opción válida!");
-        }
-        carryOn = prompt("¿Desea continuar cargando tareas? (Y/N):");
-        count++;
-    } while (carryOn.toUpperCase().trim() !== "Y" && carryOn.toUpperCase().trim() !== "N");
-    return carryOn.toUpperCase().trim() === "Y";
-}
-
-/* Aquí comienza la parte principal del código. 
-Comenzamos pidiendo el nombre y apellido del usuario.*/
-let firstName = stringCheck("Nombre");
-let lastName = stringCheck("Apellido");
-
-console.log("Bienvenido " + firstName + " " + lastName + "!");
-
-// El usuario debe tener la opcion de cargar múltiples tareas.
-let count = 0;
-let keepAdding = true;
-let taskArray = []; // Vieja funcionalidad para las primera 2 pre-entregas
-let tasksArray = []; // Para la nueva funcionalidad con DOM
-const newTaskForm = document.getElementById("add-new-task");
-
-showTasks();
-
-// Recibo la información del formulario para una nueva tarea
-newTaskForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    newTask();
-    showTasks();
-    closeModal();
-    newTaskForm.reset();
-});
-
-// Creo la funcion para crear la nueva tarea
-function newTask() {
-    const task = document.getElementById("task").value;
-    const days = document.getElementById("days").value;
-    tasksArray.push(new Task(task, days, "Santiago", "Curat"));
-}
-
-// Creo la funcion para mostrar el listado de tareas
-function showTasks() {
+// Creo la funcion para mostrar el listado de tareas pendientes
+function showPendingTasks() {
     const table = document.getElementById("task-elements");
     table.innerHTML = "";
-    if (tasksArray.length >= 1) {
-        tasksArray.forEach((task) => {
+    const pendingArray = tasksArray.filter((task) => task["done"] === false);
+    if (pendingArray.length >= 1) {
+        pendingArray.forEach((task) => {
             let record = document.createElement("tr");
+            record.setAttribute("id", `task-${task["id"]}`);
             record.innerHTML = `<td>${task["task"]}</td>
                                 <td>${task["date"].toJSON().slice(0, 10)}</td>
                                 <td>${task["days"]}</td>
                                 <td>
                                     <div class="task-options">
-                                        <img src="./multimedia/done.png" alt="completar tarea" />
-                                        <img src="./multimedia/edit.png" alt="editar tarea" />
-                                        <img src="./multimedia/delete.png" alt="eliminar tarea" />
+                                        <img src="./multimedia/done.png" alt="completar tarea" onclick="completeTask(${task["id"]})"/>
+                                        <img src="./multimedia/edit.png" alt="editar tarea" onclick="editTask(${task["id"]})"/>
+                                        <img src="./multimedia/delete.png" alt="eliminar tarea" onclick="deleteTask(${task["id"]})"/>
                                     </div>
                                 </td>`;
             table.append(record);
@@ -127,39 +44,72 @@ function showTasks() {
     }
 }
 
-do {
-    let task = taskAdd();
-    taskArray.push(task);
-    console.log(
-        "Tarea N°" +
-            (count + 1) +
-            " -> " +
-            task["task"] +
-            " -> Fecha de carga: " +
-            task["date"].toJSON().slice(0, 10) +
-            " -> " +
-            task["days"] +
-            " días para completarla -> Sus responsables son: " +
-            task["firstResponsible"] +
-            " y " +
-            task["secondResponsible"]
-    );
-    count++;
-} while (continueAdding());
+// Creo la funcion para mostrar el listado de tareas completas
+function showCompletedTasks() {
+    const table = document.getElementById("completed-task-elements");
+    table.innerHTML = "";
+    const completedArray = tasksArray.filter((task) => task["done"] === true);
+    if (completedArray.length >= 1) {
+        completedArray.forEach((task) => {
+            const record = document.createElement("tr");
+            const diffDays = (task["end"] - task["date"]) / (1000 * 60 * 60 * 24);
+            record.setAttribute("id", `task-${task["id"]}`);
+            record.innerHTML = `<td>${task["task"]}</td>
+                                <td>${task["date"].toJSON().slice(0, 10)}</td>
+                                <td>${task["end"].toJSON().slice(0, 10)}</td>
+                                <td>${diffDays.toFixed(2)}</td>`;
+            table.append(record);
+        });
+    } else {
+        const record = document.createElement("tr");
+        record.innerHTML = '<td colspan="4">Todavía no tiene tareas completadas</td>';
+        table.append(record);
+    }
+}
 
-// Le mostramos cuantas tareas fueron cargadas.
-alert("Se han cargado " + count + " tareas.");
+// Creo la funcion para crear la nueva tarea
+function newTask() {
+    const task = document.getElementById("task").value;
+    const days = document.getElementById("days").value;
+    let id =
+        tasksArray.length > 0
+            ? Math.max(
+                  ...tasksArray.map((task) => {
+                      return task["id"];
+                  })
+              ) + 1
+            : 0;
+    tasksArray.push(new Task(id, task, days));
+    saveLocal("storedTasks", JSON.stringify(tasksArray));
+}
 
-// Le mostramos el total de días de las tareas cargadas
-alert("El total de días necesarios para cumplir con las tareas cargadas es de " + taskArray.reduce((sum, task) => sum + task["days"], 0));
+// Creo la funcion para guardar las tareas en localStorage
+const saveLocal = (key, value) => {
+    localStorage.setItem(key, value);
+};
 
-// Ordenamos el array según los días de manera decreciente
-taskArray.sort((a, b) => b["days"] - a["days"]);
-console.log("Tareas ordenadas por días decrecientemente:");
-taskArray.forEach((task) => {
-    console.log(`${task["task"]} -> Fecha de carga: ${task["date"].toJSON().slice(0, 10)} -> ${task["days"]} días -> Sus responsables son: ${task["firstResponsible"]} y ${task["secondResponsible"]}`);
+// Intento de conseguir tareas almacenadas en localStorage
+const storedTasks = JSON.parse(localStorage.getItem("storedTasks"));
+const tasksArray = [];
+
+if (storedTasks) {
+    for (const task of storedTasks) {
+        tasksArray.push(new Task(task["id"], task["task"], task["days"], task["date"], task["done"], task["end"]));
+    }
+}
+
+showPendingTasks();
+showCompletedTasks();
+
+// Recibo la información del formulario para una nueva tarea
+
+const newTaskForm = document.getElementById("add-new-task");
+
+newTaskForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    newTask();
+    sortTasks();
+    showPendingTasks();
+    closeModal();
+    newTaskForm.reset();
 });
-
-// Se le da la oportunidad de filtrar por texto al usuario
-const search = prompt("Ingrese un valor de filtrado para las tareas:").toUpperCase().trim();
-console.table(taskArray.filter((task) => task["task"].toUpperCase().includes(search)));
