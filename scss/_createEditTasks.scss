@@ -2,7 +2,8 @@
 - New Task
 -----------------------------------------------------------------------*/
 
-.new-task-modal {
+.new-task-modal,
+.edit-task-modal {
     position: absolute;
     top: 20%;
     display: flex;

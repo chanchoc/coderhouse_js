@@ -31,7 +31,7 @@ function showPendingTasks() {
                                 <td>
                                     <div class="task-options">
                                         <img src="./multimedia/done.png" alt="completar tarea" onclick="completeTask(${task["id"]})"/>
-                                        <img src="./multimedia/edit.png" alt="editar tarea" onclick="editTask(${task["id"]})"/>
+                                        <img src="./multimedia/edit.png" alt="editar tarea" onclick="editModal(${task["id"]})"/>
                                         <img src="./multimedia/delete.png" alt="eliminar tarea" onclick="deleteTask(${task["id"]})"/>
                                     </div>
                                 </td>`;

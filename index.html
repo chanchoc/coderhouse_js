@@ -49,6 +49,19 @@
                     <button type="submit">Crear</button>
                 </form>
             </section>
+            <section class="edit-task-modal hidden">
+                <div>
+                    <h2>Editar Tarea</h2>
+                    <button id="edit-task-close">⨉</button>
+                </div>
+                <form id="edit-task">
+                    <label for="task">Tarea:</label>
+                    <input type="text" id="changed-task" placeholder="Ingrese su tarea..." required />
+                    <label for="days">Días:</label>
+                    <input type="number" id="changed-days" min="0" required />
+                    <button type="submit">Editar</button>
+                </form>
+            </section>
             <div class="overlay hidden"></div>
             <section class="task-container">
                 <table class="tasks">
@@ -78,7 +91,8 @@
                 </table>
             </section>
         </main>
-        <script src="./scripts/modal.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="./scripts/modals.js"></script>
         <script src="./scripts/sorting.js"></script>
         <script src="./scripts/main.js"></script>
         <script src="./scripts/options.js"></script>
