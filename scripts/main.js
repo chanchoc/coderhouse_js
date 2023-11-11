@@ -14,6 +14,10 @@ class Task {
     toString = () => {
         return this.task;
     };
+    editTask(task, days) {
+        this.task = task;
+        this.days = parseInt(days);
+    }
 }
 
 // Creo la funcion para mostrar el listado de tareas pendientes
@@ -80,28 +84,13 @@ function newTask() {
               ) + 1
             : 0;
     tasksArray.push(new Task(id, task, days));
-    saveLocal("storedTasks", JSON.stringify(tasksArray));
+    saveLocal(TASKS_LOCAL_STORAGE, JSON.stringify(tasksArray));
 }
 
 // Creo la funcion para guardar las tareas en localStorage
 const saveLocal = (key, value) => {
     localStorage.setItem(key, value);
 };
-
-// Intento de conseguir tareas almacenadas en localStorage
-const storedTasks = JSON.parse(localStorage.getItem("storedTasks"));
-const tasksArray = [];
-
-if (storedTasks) {
-    for (const task of storedTasks) {
-        tasksArray.push(new Task(task["id"], task["task"], task["days"], task["date"], task["done"], task["end"]));
-    }
-}
-
-showPendingTasks();
-showCompletedTasks();
-
-// Recibo la información del formulario para una nueva tarea
 
 const newTaskForm = document.getElementById("add-new-task");
 
@@ -113,3 +102,57 @@ newTaskForm.addEventListener("submit", (event) => {
     closeModal();
     newTaskForm.reset();
 });
+
+// Intento de conseguir tareas almacenadas en localStorage, de lo contrario, cargo las del mock
+const RELATIVE_URL = "mocks/tasks.json";
+const TASKS_LOCAL_STORAGE = "storedTasks";
+const tasksArray = [];
+
+function unhideSpinners() {
+    const spinners = document.querySelectorAll(".loading-spinner");
+    spinners.forEach((spinner) => {
+        spinner.classList.remove("hidden");
+    });
+}
+
+function hideSpinners() {
+    const spinners = document.querySelectorAll(".loading-spinner");
+    spinners.forEach((spinner) => {
+        spinner.classList.add("hidden");
+    });
+}
+
+async function firstRender() {
+    unhideSpinners();
+    const storedTasks = await JSON.parse(localStorage.getItem(TASKS_LOCAL_STORAGE));
+    if (storedTasks) {
+        storedTasks.forEach((task) => {
+            tasksArray.push(new Task(task["id"], task["task"], task["days"], task["date"], task["done"], task["end"]));
+        });
+        hideSpinners();
+    } else {
+        await fetch(RELATIVE_URL)
+            .then(async (response) => await response.json())
+            .then(async (tasks) => {
+                await tasks.forEach((task) => {
+                    tasksArray.push(new Task(task["id"], task["task"], task["days"], task["date"], task["done"], task["end"]));
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudieron recuperar las tareas cargadas!",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            })
+            .finally(() => {
+                hideSpinners();
+            });
+    }
+    showPendingTasks();
+    showCompletedTasks();
+}
+
+firstRender();

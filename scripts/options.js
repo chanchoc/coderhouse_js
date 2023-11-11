@@ -17,7 +17,7 @@ function completeTask(id) {
                 .indexOf(id);
             tasksArray[index]["done"] = true;
             tasksArray[index]["end"] = new Date();
-            saveLocal("storedTasks", JSON.stringify(tasksArray));
+            saveLocal(TASKS_LOCAL_STORAGE, JSON.stringify(tasksArray));
             showPendingTasks();
             showCompletedTasks();
             Swal.fire({
@@ -47,7 +47,7 @@ function deleteTask(id) {
                 })
                 .indexOf(id);
             tasksArray.splice(index, 1);
-            saveLocal("storedTasks", JSON.stringify(tasksArray));
+            saveLocal(TASKS_LOCAL_STORAGE, JSON.stringify(tasksArray));
             showPendingTasks();
             Swal.fire({
                 title: "Tarea eliminada!",
@@ -79,7 +79,6 @@ editTaskForm.addEventListener("submit", (event) => {
 });
 
 function editTask(id) {
-    console.log(id);
     const task = document.getElementById("changed-task").value;
     const days = document.getElementById("changed-days").value;
     Swal.fire({
@@ -96,9 +95,8 @@ function editTask(id) {
                     return task["id"];
                 })
                 .indexOf(id);
-            tasksArray[index]["task"] = task;
-            tasksArray[index]["days"] = parseInt(days);
-            saveLocal("storedTasks", JSON.stringify(tasksArray));
+            tasksArray[index].editTask(task, days);
+            saveLocal(TASKS_LOCAL_STORAGE, JSON.stringify(tasksArray));
             showPendingTasks();
             Swal.fire({
                 title: "Tarea editada!",
