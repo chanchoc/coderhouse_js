@@ -2,7 +2,7 @@ Página para cargar tareas a realizar (To-Do App).
 
 La misma contiene:
 
--   Listado de las tareas a completar
+-   Listado de las tareas a completar (mediante clases)
 -   Posibilidad de cargar más tareas:
     -   Nombre de la tarea
     -   Fecha de carga
