@@ -17,3 +17,5 @@ La misma contiene:
     -   Fecha de carga
     -   Dias de finalización
 -   Mostrar alert cuando se agrego, edita, completa o elimina una tarea
+-   Spinner Loader mientras se cargan las tareas
+-   Tareas default para demostrar la conexión a una API
